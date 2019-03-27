@@ -1,0 +1,45 @@
+html {
+  font-family: Hiragino Sans, Hiragino Sans GB, sans-serif;
+  font-size: 16px;
+  color: transparent !important;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #232323;
+  color: #fff;
+}
+article {
+  display: flex;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+}
+article main {
+  flex-basis: 20rem;
+  background-color: #47b24a;
+  color: #000;
+}
+article ul {
+  list-style: none;
+}
+h1 {
+  margin: 0;
+}
+h2 {
+  opacity: 0;
+}
+a:link,
+a:visited {
+  color: #1e481e;
+  text-decoration: none;
+  transition: all 0.15s ease-out;
+}
+a:hover {
+  color: #368236;
+}
+a:active {
+  color: #173617;
+}

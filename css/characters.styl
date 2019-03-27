@@ -1,0 +1,107 @@
+section.characters
+  &
+    position relative
+    flex 1
+    margin 0
+    padding 0
+    font-family Didot,
+      YuMincho,
+      Hiragino Mincho ProN,
+      Source Han Serif K,
+      Source Han Serif,
+      serif
+  li
+    position absolute
+    line-height 1
+  [data-latn=chuo]
+    &
+      bottom 1rem
+      left -.875rem
+      font-size 9rem
+      font-weight 500
+      color rgba(#9dedba, .2)
+    @media (min-width: $rwd-boundary)
+      animation yAxis-1 30s infinite cubic-bezier(0.02, 0.01, 0.57, 0.36)
+  [data-latn=shan]
+    top -.675em
+    right -.25em
+    font-size 3rem
+    color rgba(#9dedba, .2)
+  [data-latn=min]
+    top -1rem
+    left 24rem
+    font-size 3rem
+    font-weight 200
+    color rgba(#fff, .3)
+  [data-name=open-quote]
+    top 24rem
+    right .875em
+    font-size 4rem
+    color rgba(#9dede2, .4)
+  [data-latn=mi]
+    &
+      top 24rem
+      right -.5em
+      font-size 9rem
+      transform scale(.75, 1.125)
+      color rgba(#9dedba, .125)
+    @media (min-width: $rwd-boundary)
+      animation yAxis-1 50s infinite cubic-bezier(0.02, 0.01, 0.57, 0.36)
+  [data-latn=zi]
+    &
+      top 12rem
+      left 14rem
+      font-size 4rem
+      color rgba(#9dedba, .2)
+    @media (min-width: $rwd-boundary)
+      animation yAxis-2 10s infinite cubic-bezier(0.02, 0.01, 0.57, 0.36)
+  [data-latn=ji]
+    top 6.5rem
+    left 9rem
+    font-size 4rem
+    color rgba(#9dedba, .425)
+  [data-latn=ja]
+    top 2.5rem
+    left 13rem
+    font-size 4rem
+    color rgba(#9dedba, .125)
+  [data-latn=chu]
+    bottom -.75em
+    right 8.125rem
+    font-size 4rem
+    font-family Source Han Sans
+    font-weight 100
+    color rgba(#9dedba, .2)
+  [data-name=book-title-mark]
+    top 2.5rem
+    left 13rem
+    margin-left 1em
+    font-size 4rem
+    color rgba(#76cbbf, .5)
+  [data-name=comma]
+  [data-name=secondary-comma]
+  [data-name=period]
+    top -5.5rem
+    left 0
+    font-size 18rem
+    color rgba(#9dedba, .1)
+  [data-name=secondary-comma]
+    top -.5em
+    left -.125em
+    font-size 10rem
+    color rgba(#9dedba, .05)
+  [data-name=period]
+    &
+      top -11rem
+      left .125em
+      color rgba(#bbb, .1)
+    @media (min-width: $rwd-boundary)
+      animation xAxis-2 10s infinite cubic-bezier(0.02, 0.01, 0.57, 0.36)
+  [data-name=close-quote]:lang(en)
+    &
+      top 12.5rem
+      right 1.25rem
+      font-size 4rem
+      color rgba(#9dedba, .5)
+    @media (min-width: $rwd-boundary)
+      animation xAxis-1 20s infinite cubic-bezier(0.02, 0.01, 0.57, 0.36)

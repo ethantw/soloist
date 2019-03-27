@@ -1,0 +1,42 @@
+$global-line-height = 1.2
+$main-width = 20rem
+$rwd-boundary = 450px
+
+html
+  &
+    box-sizing border-box
+    max-width 100vw
+    overflow-x hidden
+    font-family YuMincho, Source Han Serif K, Source Han Serif, Hiragino Mincho ProN, serif
+    font-size 16px
+    line-height 1.2
+    color transparent !important
+*
+*::before
+*::after
+  box-sizing inherit
+:lang(zh-Latn)
+:lang(en)
+  font-family Didot, serif
+body
+  margin 0
+  padding 0
+  min-height 100vh
+  overflow-x inherit
+  background-color #232323
+  color #fff
+h1
+  margin 0
+h2
+  font-size 0
+  line-height 0
+  color transparent
+a:link
+a:visited
+  color #1e481e
+  text-decoration none
+  transition all .15s ease-out
+a:hover
+  color lighten(#1e481e, 20%)
+a:active
+  color darken(#1e481e, 25%)
