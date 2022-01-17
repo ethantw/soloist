@@ -2,4 +2,5 @@
 .bsb.lock
 node_modules
 public
+lib
 **/*.bs.js

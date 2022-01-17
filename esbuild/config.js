@@ -1,4 +1,4 @@
-import { join as joinPath } from 'path'
+import { stylusLoader } from 'esbuild-stylus-loader'
 
 const __DIST__ = 'public'
 
@@ -11,8 +11,10 @@ const config = {
     '.js': 'jsx',
     '.jpg': 'file',
     '.png': 'file',
-    '.svg': 'file',
+    '.svg': 'text',
     '.woff2': 'file',
+    '.styl': 'text',
+    '.client.js': 'text',
   },
 
   assetNames: 'assets/[name].[hash]',

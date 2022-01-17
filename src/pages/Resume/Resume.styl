@@ -1,0 +1,409 @@
+HTML
+  overflow-x hidden
+  font-size 16px
+  font-family \
+    Avenir Next, Helvetica Neue, Helvetica, \
+    YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
+    Hiragino Sans GB, \
+    sans-serif
+  line-height 1.5
+  background-color #fcfcfc
+  color rgb(40, 40, 40)
+  box-sizing border-box
+
+*
+*::before
+*::after
+  box-sizing inherit
+
+// ================
+// GENERAL ELEMENTS
+// ================
+A
+  &
+    transition .15s all ease-out
+  &:link
+  &:visited
+    color #777
+  &:hover
+    color lighten(#777, 30%)
+  &:active
+    color darken(#777, 10%)
+
+Address
+  font-style inherit
+Button
+  padding 0
+  font-size inherit
+  background none
+  border 0
+  color inherit
+  cursor pointer
+DD
+  margin 0
+.Icon
+  &
+    width 1em
+  &[data-icon="toggle"]
+    font-size 1.5rem
+Label
+  cursor pointer
+P:lang(zh)
+  text-align justify
+
+// ======
+// HEADER
+// ======
+Body > Header
+  &
+    padding .5em 1em 0
+    background-color #f6f6f7
+  ul
+    display flex
+    justify-content center
+    align-items center
+    margin 0
+    list-style none
+  li
+    &
+      margin 0
+      transition .25s all ease-out
+    &:not(:last-child)
+      //margin-right 1em
+  button
+    display none
+// ======================
+// TOGGLES IN THE HEADERS
+// ======================
+Body > Header label
+  &
+    position relative
+    display flex
+    align-items center
+    flex-direction column
+    width 4.5rem
+    font 0/0 Arial
+    color transparent
+  &::before
+  &::after
+    position absolute
+    top 0
+    z-index 0
+    display block
+    width 100%
+    height 1em
+    speak never
+    font-family \
+      Optima, Helvetica Neue, Helvetica, Arial, \
+      YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
+      Hiragino Sans GB, \
+      sans-serif
+    font-size 1rem
+    font-weight bold
+    line-height 1
+    text-align center
+    text-transform uppercase
+    transition .15s background-color ease-out
+    transition-delay .075s
+  &::after
+    top auto
+    bottom .5em
+  .Icon
+    position relative
+    z-index 5
+
+$toggle-inactive-text
+$toggle-active-text
+$toggle-neither-text
+  background-color #939393
+  color transparent
+  text-shadow 2px 2px 3px rgba(255,255,255,.5)
+  -webkit-background-clip text
+  -moz-background-clip text
+  background-clip text
+$toggle-active-text
+  background-color rgb(143, 201, 62)
+$toggle-neither-text
+  background-color rgba(143, 201, 62, .75)
+  transition-delay: .15s
+
+$toggle-label-in-zh
+  letter-spacing .4em
+  padding-left @letter-spacing
+
+$toggle-upward
+  &::before
+    @extends $toggle-active-text
+  &::after
+    @extends $toggle-inactive-text
+
+$toggle-downward
+  #handle
+    transform scaleY(-1)
+    transform-origin center 86px
+  #ball
+    transform translateY(90px)
+  &::before
+    @extends $toggle-inactive-text
+  &::after
+    @extends $toggle-active-text
+
+$toggle-neither
+  &::before
+  &::after
+    @extends $toggle-neither-text
+  #handle
+    transform scale(0)
+  #ball
+    transform translateY(60px)
+
+#handle
+#ball
+  transition .15s all ease-out
+
+for toggle-id in "zh--en" "hant--hans" "dark--light" "sans-serif--serif" "horizontal--vertical" "f-left--justified"
+  input#{toggle-id}:indeterminate ~ header label[for={s("%s", toggle-id)}]
+    @extends $toggle-neither
+  input#{toggle-id}:not(:indeterminate):not(:checked) ~ header label[for={s("%s", toggle-id)}]
+    @extends $toggle-upward
+  input#{toggle-id}:not(:indeterminate):checked ~ header label[for={s("%s", toggle-id)}]
+    @extends $toggle-downward
+
+input#zh--en:not(:checked) ~ header ul li:lang(en)
+input#zh--en:checked ~ header ul li:lang(zh):not(:first-child)
+  display none
+input#zh--en:checked ~ header ul li.hant--hans:lang(zh)
+  &
+    position relative
+    display list-item
+    cursor not-allowed
+    opacity .5
+  label
+    pointer-events none
+
+label[for="zh--en"]
+  &::before
+    content '中文'
+    @extends $toggle-label-in-zh
+  &::after
+    content 'Eng'
+    letter-spacing 0
+label[for="hant--hans"]
+  &::before
+    content '繁'
+  &::after
+    content '简'
+label[for="dark--light"]
+  &:lang(zh)::before
+    content '淺'
+    @extends $toggle-label-in-zh
+  &:lang(en)::before
+    content 'Light'
+  &:lang(zh)::after
+    content '深'
+    @extends $toggle-label-in-zh
+  &:lang(en)::after
+    content 'Dark'
+label[for="sans-serif--serif"]
+  &:lang(zh)::before
+    content '方'
+    @extends $toggle-label-in-zh
+  &:lang(en)::before
+    content 'Sans'
+    //font-family: DIN Alternate Bold, sans-serif
+  &:lang(zh)::after
+    content '宋'
+    font-family: YuMincho, Hiragino Mincho ProN, serif
+    @extends $toggle-label-in-zh
+  &:lang(en)::after
+    content 'Serif'
+    font-family: 'Bodoni 72 Bold', Times, serif
+label[for="horizontal--vertical"]
+  &::before
+    content '橫'
+    @extends $toggle-label-in-zh
+  &::after
+    content '縱'
+    @extends $toggle-label-in-zh
+label[for="f-left--justified"]
+  &::before
+    content 'F. left'
+  &::after
+    content 'Justif.'
+
+// ==========================================
+// CONTENT STYLES BASED ON PREFERENCE TOGGLES
+// ==========================================
+//
+// Chinese/English:
+input#zh--en:not(:indeterminate):not(:checked) ~ main article
+  h1, h2, h3, h4, h5, h6, p
+    &:lang(en)
+      display none
+input#zh--en:not(:indeterminate):checked ~ main article
+  h1, h2, h3, h4, h5, h6, p
+    &:lang(zh)
+      display none
+input#zh--en:indeterminate ~ main article
+  h1, h2, h3, h4, h5, h6, p
+    //display block
+
+// Hant/Hans:
+
+// Sans-serif/serif:
+input#sans-serif--serif:not(:checked) ~ main article
+  :lang(zh-Hans)
+    font-family \
+      Avenir Next, Helvetica Neue, Helvetica, \
+      Hiragino Sans GB, \
+      sans-serif
+input#sans-serif--serif:checked ~ main article
+  &
+    font-family Didot, YuMincho, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+  :lang(zh-Hans)
+    font-family Didot, Noto Serif SC, Songti SC, serif
+ 
+// Alignment:
+input#zh--en:checked ~ input#f-left--justified:checked ~ main article
+  p:lang(en)
+    -webkit-hyphens auto
+    hyphens auto
+    text-align justify
+
+// =======
+// CONTENT
+// =======
+Main
+  &
+    display flex
+    justify-content center
+    padding 5rem 2em 8rem
+    width 100%
+  address
+    &
+      position sticky
+      top 4rem
+      margin 4rem 1em 1em 0
+      width 10rem
+      height fit-content
+      font-family \
+        Gill Sans, Gill Sans Light, \
+        Avenir Next, Helvetica Neue, Arial, \
+        YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
+        Hiragino Sans GB, \
+        sans-serif
+      font-weight 300
+    input#zh--en:indeterminate ~ &
+      margin-top 7rem
+    h1
+      &
+        display inline
+        font-family: Optima, YuMincho, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+        font-size 1em
+        font-weight normal
+      /input#zh--en:not(:indeterminate):not(:checked) ~ &:lang(en)
+      /input#zh--en:not(:indeterminate):checked ~ &:lang(zh)
+        display none
+
+    dl
+      margin .5em 0
+    dt
+      position absolute
+      z-index -10
+      display inline
+      opacity 0
+    h1 + h1::before
+    dt + dt::before
+      content ' '
+      font-size .875em
+    dd
+      margin-bottom .25rem
+    dd:last-child
+      margin-top 1rem
+  h1, h2, h3, h4, h5, h6, p.period
+    margin 0
+  article
+    &
+      position relative
+      flex 1
+      max-width 40em
+    h1
+      &
+        display flex
+        align-items baseline
+        font-size 1.25rem
+        font-family \
+          Gill Sans, Avenir Next, Helvetica Neue, Helvetica, \
+          YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
+          Hiragino Sans GB, \
+          sans-serif
+        font-weight normal
+        line-height 1.5
+        text-shadow 1px 1px 0 #eee
+        color rgb(112, 125, 113)
+      b
+        display block
+        margin-right .25em
+        font-family: /*'Bodoni 72 Bold',*/ Didot, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+        font-size 2rem
+        font-weight normal
+        text-shadow none
+        color rgb(27, 31, 25)
+      b:lang(en),
+      b:lang(zh)::first-letter
+        font-weight bolder
+        color #485043
+
+    p + h2,
+    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h2 + h2
+      margin-top 2em
+    p + h3,
+    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h3 + h3
+      margin-top 1.5em
+    h2
+      &
+        font-family: Didot, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+        font-size 1.25rem
+      &:lang(zh)
+        letter-spacing .25em
+    h2 + h3
+      margin-top .5em
+    h3
+      &
+        font-family DIN Alternate, DIN Alternate Bold, Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Sans GB, sans-serif
+        font-size 1rem
+        font-weight 600
+      a[href="//mockingbot.com"]
+        font-size .75rem
+    /input#zh--en:indeterminate ~ Main article h3 + p.period
+      margin-top .5em
+    p.period + p:not(.period)
+      margin-top .5em
+    h3 + p:not(.period)
+    h3 + p:lang(zh):not(.period) + p:lang(en):not(.period)
+      margin-top .25em
+    p.period
+      margin .125rem 0
+      font-size .875rem
+      font-family \
+        Gill Sans, \
+        Avenir Next, Helvetica Neue, Arial, \
+        YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
+        Hiragino Sans GB, \
+        sans-serif
+      color #7a8c7a
+
+// ======
+// FOOTER
+// ======
+Body > Footer
+  &
+    display flex
+    padding .5em 2rem
+    height 3rem
+    justify-content flex-end
+    align-items center
+    background-color #f6f6f7
+    color #543252
+  p
+    margin 0

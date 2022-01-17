@@ -1,15 +1,13 @@
 {
-  "name": "resume",
+  "name": "soloist",
   "version": "1.0.0",
-  "description": "Yijun’s résumé 2022.",
+  "description": "Yijun’s",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "start": "npx rescript build -w",
+    "start": "npx rescript build -w && npx http-server public --port=8000",
     "build": "npx rescript"
   },
   "author": "Chen Yijun",
-  "license": "ISC",
   "engines": {
     "node": "15.x"
   },
@@ -23,12 +21,18 @@
     "commonmark": "^0.30.0",
     "date-fns": "^2.28.0",
     "esbuild": "^0.14.11",
+    "esbuild-stylus-loader": "^0.4.1",
+    "http-server": "^14.1.0",
     "markdown-it": "^12.3.2",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
-    "res-date-fns": "^1.1.2"
+    "res-date-fns": "^1.1.2",
+    "stylus": "^0.56.0",
+    "styluslint": "^0.0.1-beta.3"
   },
   "devDependencies": {
     "gentype": "^4.3.0",
