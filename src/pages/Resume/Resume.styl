@@ -1,11 +1,21 @@
+$ff-sans-latin         = Avenir Next, Helvetica Neue, Helvetica, Arial
+$ff-sans-hant          = YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Sans GB, Noto Sans CJK KR, Noto Sans CJK JP
+$ff-sans-hans          = Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans CN
+
+$ff-sans-generic       = $ff-sans-latin, $ff-sans-hant, sans-serif
+$ff-sans-generic-hans  = $ff-sans-latin, $ff-sans-hans, sans-serif
+
+$ff-serif-latin        = Didot
+$ff-serif-hant         = YuMincho, Hiragino Mincho ProN, Noto Serif CJK KR, Noto Serif CJK JP, Source Han Serif KR, Source Han Serif JP
+$ff-serif-hans         = Noto Serif CJK SC, Source Han Serif CN
+
+$ff-serif-generic      = $ff-serif-latin, $ff-serif-hant, serif
+$ff-serif-generic-hans = $ff-serif-latin, $ff-serif-hans, serif
+
 HTML
   overflow-x hidden
   font-size 16px
-  font-family \
-    Avenir Next, Helvetica Neue, Helvetica, \
-    YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
-    Hiragino Sans GB, \
-    sans-serif
+  font-family $ff-sans-generic
   line-height 1.5
   background-color #fcfcfc
   color rgb(40, 40, 40)
@@ -93,11 +103,7 @@ Body > Header label
     width 100%
     height 1em
     speak never
-    font-family \
-      Optima, Helvetica Neue, Helvetica, Arial, \
-      YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
-      Hiragino Sans GB, \
-      sans-serif
+    font-family Optima, $ff-sans-generic
     font-size 1rem
     font-weight bold
     line-height 1
@@ -210,14 +216,13 @@ label[for="sans-serif--serif"]
     @extends $toggle-label-in-zh
   &:lang(en)::before
     content 'Sans'
-    //font-family: DIN Alternate Bold, sans-serif
   &:lang(zh)::after
     content '宋'
-    font-family: YuMincho, Hiragino Mincho ProN, serif
+    font-family: $ff-serif-generic
     @extends $toggle-label-in-zh
   &:lang(en)::after
     content 'Serif'
-    font-family: 'Bodoni 72 Bold', Times, serif
+    font-family: 'Bodoni 72 Bold', $ff-serif-generic
 label[for="horizontal--vertical"]
   &::before
     content '橫'
@@ -244,25 +249,25 @@ input#zh--en:not(:indeterminate):checked ~ main article
   h1, h2, h3, h4, h5, h6, p
     &:lang(zh)
       display none
-input#zh--en:indeterminate ~ main article
-  h1, h2, h3, h4, h5, h6, p
-    //display block
 
 // Hant/Hans:
+input#hant--hans:not(:checked) ~ main article
+  h1, h2, h3, h4, h5, h6, p
+    &:lang(zh-cmn-Hans)
+      display none
+input#hant--hans:checked ~ main article
+  h1, h2, h3, h4, h5, h6, p
+    &:lang(zh-cmn-Hant)
+      display none
 
 // Sans-serif/serif:
-input#sans-serif--serif:not(:checked) ~ main article
-  :lang(zh-Hans)
-    font-family \
-      Avenir Next, Helvetica Neue, Helvetica, \
-      Hiragino Sans GB, \
-      sans-serif
+input#hant--hans:checked ~ input#sans-serif--serif:not(:checked) ~ main article
+  font-family $ff-sans-generic-hans
 input#sans-serif--serif:checked ~ main article
-  &
-    font-family Didot, YuMincho, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
-  :lang(zh-Hans)
-    font-family Didot, Noto Serif SC, Songti SC, serif
- 
+  font-family $ff-serif-generic
+input#hant--hans:checked ~ input#sans-serif--serif:checked ~ main article
+  font-family $ff-serif-generic-hans
+
 // Alignment:
 input#zh--en:checked ~ input#f-left--justified:checked ~ main article
   p:lang(en)
@@ -286,19 +291,14 @@ Main
       margin 4rem 1em 1em 0
       width 10rem
       height fit-content
-      font-family \
-        Gill Sans, Gill Sans Light, \
-        Avenir Next, Helvetica Neue, Arial, \
-        YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
-        Hiragino Sans GB, \
-        sans-serif
+      font-family Gill Sans, Gill Sans Light, $ff-sans-generic
       font-weight 300
     input#zh--en:indeterminate ~ &
       margin-top 7rem
     h1
       &
         display inline
-        font-family: Optima, YuMincho, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+        font-family: Optima, $ff-serif-generic
         font-size 1em
         font-weight normal
       /input#zh--en:not(:indeterminate):not(:checked) ~ &:lang(en)
@@ -332,66 +332,77 @@ Main
         display flex
         align-items baseline
         font-size 1.25rem
-        font-family \
-          Gill Sans, Avenir Next, Helvetica Neue, Helvetica, \
-          YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
-          Hiragino Sans GB, \
-          sans-serif
+        font-family Gill Sans, $ff-sans-generic
         font-weight normal
         line-height 1.5
         text-shadow 1px 1px 0 #eee
         color rgb(112, 125, 113)
+      &:lang(zh-Hans)
+        font-family Gill Sans, $ff-sans-generic-hans
       b
-        display block
-        margin-right .25em
-        font-family: /*'Bodoni 72 Bold',*/ Didot, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
-        font-size 2rem
-        font-weight normal
-        text-shadow none
-        color rgb(27, 31, 25)
-      b:lang(en),
-      b:lang(zh)::first-letter
-        font-weight bolder
-        color #485043
+        &
+          display block
+          margin-right .25em
+          font-family $ff-serif-generic
+          font-size 2rem
+          font-weight normal
+          text-shadow none
+          color rgb(27, 31, 25)
+        &:lang(zh-Hans)
+          font-family $ff-serif-generic-hans
+        &:lang(en),
+        &:lang(zh)::first-letter
+          font-weight bolder
+          color #485043
 
     p + h2,
-    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h2 + h2
+    p + h2 + h2,
+    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h2 + h2 + h2
       margin-top 2em
     p + h3,
-    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h3 + h3
+    p + h3 + h3,
+    /input#zh--en:not(:indeterminate):checked ~ Main Article p + h3 + h3 + h3
       margin-top 1.5em
     h2
       &
-        font-family: Didot, Hiragino Mincho ProN, Noto Serif KR, Noto Serif JP, serif
+        font-family: $ff-serif-generic
         font-size 1.25rem
       &:lang(zh)
         letter-spacing .25em
-    h2 + h3
+      &:lang(zh-Hans)
+        font-family: $ff-serif-generic-hans
+    h2 + h3,
+    /input#hant--hans:checked ~ Main article h2 + h3 + h3,
+    /input#zh--en:checked ~ Main article h2 + h3 + h3 + h3
       margin-top .5em
     h3
       &
-        font-family DIN Alternate, DIN Alternate Bold, Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Sans GB, sans-serif
+        font-family DIN Alternate, DIN Alternate Bold, $ff-sans-generic
         font-size 1rem
         font-weight 600
+      &:lang(zh-Hans)
+        font-family DIN Alternate, DIN Alternate Bold, $ff-sans-generic-hans
       a[href="//mockingbot.com"]
         font-size .75rem
     /input#zh--en:indeterminate ~ Main article h3 + p.period
+    /input#zh--en:indeterminate ~ Main article h3 + p.period + p:lang(zh).period
       margin-top .5em
     p.period + p:not(.period)
+    /input#zh--en:not(:checked) ~ Main article p.period + p:not(.period) + p:lang(zh):not(.period)
+    /input#zh--en:checked ~ Main article p.period + p:not(.period) + p:lang(zh):not(.period) + p:lang(en):not(.period)
       margin-top .5em
     h3 + p:not(.period)
-    h3 + p:lang(zh):not(.period) + p:lang(en):not(.period)
+    /input#zh--en:not(:checked) ~ Main article h3 + p:not(.period) + p:lang(zh):not(.period)
+    /input#zh--en:checked ~ Main article h3 + p:not(.period) + p:lang(zh):not(.period) + p:lang(en):not(.period)
       margin-top .25em
     p.period
-      margin .125rem 0
-      font-size .875rem
-      font-family \
-        Gill Sans, \
-        Avenir Next, Helvetica Neue, Arial, \
-        YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, \
-        Hiragino Sans GB, \
-        sans-serif
-      color #7a8c7a
+      &
+        margin .125rem 0
+        font-size .875rem
+        font-family Gill Sans, $ff-sans-generic
+        color #7a8c7a
+      &:lang(zh-Hans)
+        font-family Gill Sans, $ff-sans-generic-hans
 
 // ======
 // FOOTER

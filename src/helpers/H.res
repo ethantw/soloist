@@ -1,6 +1,7 @@
 // Helper functions
 // ================
 
+let fold = Belt.Array.reduce
 let s = s => React.string(s)
 
 let joinDocPaths = path => Node.Path.join([Node.Process.cwd(), "./doc", path])

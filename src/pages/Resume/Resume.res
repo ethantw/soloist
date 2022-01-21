@@ -30,6 +30,7 @@ module Cheerio = {
 
   @send external add: (element, string) => element = "add"
   @send external addClass: (element, string) => element = "addClass"
+  @send external clone: (element) => element = "clone"
 
   @send external after: (element, string) => element = "after"
   @send external insertAfter: (element, element) => element = "insertAfter"
@@ -119,7 +120,7 @@ let toggles_by_id =
   -> Belt.Array.reduce(
       Js.Dict.empty(),
       (acc, t) => {
-        acc->Js.Dict.set(t.id, t)
+        acc -> Js.Dict.set(t.id, t)
         acc
       },
     )
@@ -187,8 +188,22 @@ let getResumeHTML = () => {
     -> Cheerio.filter(":nth-child(even)")
     -> Cheerio.setAttr("lang", "en")
   
-  // 4. [TODO] Convert to Simplified Chinese:
-  // [...]
+  // 4. Convert to Simplified Chinese:
+  let _hantBlocks =
+    blocks
+    -> Cheerio.filter(":nth-child(odd)")
+    -> Cheerio.each((_i, elmt) => {
+        let html =
+          c(. Cheerio.element(elmt))
+          -> Cheerio.getHTMLOfElement
+          -> HantHans.toHans
+
+        c(. Cheerio.element(elmt))
+        -> Cheerio.clone
+        -> Cheerio.setHTML(html)
+        -> Cheerio.setAttr("lang", "zh-cmn-Hans")
+        -> Cheerio.insertAfter(elmt)
+      })
   
   // 5. The result:
   c(. Cheerio.string("article")) -> Cheerio.getHTMLOfElement
