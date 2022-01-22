@@ -136,11 +136,11 @@ let getResumeHTML = () => {
   let c = Cheerio.load(`<article>${resumeMDHTML}</article>`)
 
   let _ =
-    c(. Cheerio.string("p > time:only-child"))
+    c(.Cheerio.string("p > time:only-child"))
     -> Cheerio.parent("p")
     -> Cheerio.addClass("period")
     -> Cheerio.each((_, elmt) => {
-      let text = c(. Cheerio.element(elmt)) -> Cheerio.getText
+      let text = c(.Cheerio.element(elmt)) -> Cheerio.getText
 
       let zh =
         text
@@ -164,19 +164,19 @@ let getResumeHTML = () => {
         )
         -> Js.Array2.joinWith(` － `)
 
-      c(. Cheerio.element(elmt))
+      c(.Cheerio.element(elmt))
       -> Cheerio.setHTML(`<time datetime="${text}">${zh}</time>`)
       -> Cheerio.after(`\n<p class='period'><time datetime="${text}">${en}</time></p>`)
     })
 
   // 2. Add `target="_blank"` to all links:
   let _ =
-    c(. Cheerio.string("a:link"))
+    c(.Cheerio.string("a:link"))
     -> Cheerio.setAttr("target", "_blank")
     -> Cheerio.setAttr("rel", "noopener noreferrer nofollow")
 
   // 3. Pairing all Chinese & English headings, paragraphs, etc:
-  let blocks = c(. Cheerio.string("article > h1, h2, h3, h4, h5, h6, p, blockquote"))
+  let blocks = c(.Cheerio.string("article > h1, h2, h3, h4, h5, h6, p, blockquote"))
 
   let _ =
     blocks
@@ -195,11 +195,11 @@ let getResumeHTML = () => {
     -> Cheerio.each((_i, elmt) => {
 
         let html =
-          c(. Cheerio.element(elmt))
+          c(.Cheerio.element(elmt))
           -> Cheerio.getHTMLOfElement
           -> HantHans.toHans
 
-        c(. Cheerio.element(elmt))
+        c(.Cheerio.element(elmt))
         -> Cheerio.clone
         -> Cheerio.setHTML(html)
         -> Cheerio.setAttr("lang", "zh-cmn-Hans")
@@ -207,7 +207,7 @@ let getResumeHTML = () => {
       })
 
   // 5. The result:
-  c(. Cheerio.string("article")) -> Cheerio.getHTMLOfElement
+  c(.Cheerio.string("article")) -> Cheerio.getHTMLOfElement
 }
 
 @react.component
