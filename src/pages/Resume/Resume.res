@@ -193,6 +193,7 @@ let getResumeHTML = () => {
     blocks
     -> Cheerio.filter(":nth-child(odd)")
     -> Cheerio.each((_i, elmt) => {
+
         let html =
           c(. Cheerio.element(elmt))
           -> Cheerio.getHTMLOfElement
@@ -204,7 +205,7 @@ let getResumeHTML = () => {
         -> Cheerio.setAttr("lang", "zh-cmn-Hans")
         -> Cheerio.insertAfter(elmt)
       })
-  
+
   // 5. The result:
   c(. Cheerio.string("article")) -> Cheerio.getHTMLOfElement
 }

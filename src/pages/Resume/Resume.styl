@@ -20,6 +20,10 @@ HTML
   background-color #fcfcfc
   color rgb(40, 40, 40)
   box-sizing border-box
+HTML
+Body
+  margin 0
+  padding 0
 
 *
 *::before
@@ -34,7 +38,10 @@ A
     transition .15s all ease-out
   &:link
   &:visited
-    color #777
+    &
+      color #777
+    @media print
+      color #666
   &:hover
     color lighten(#777, 30%)
   &:active
@@ -68,6 +75,8 @@ Body > Header
   &
     padding .5em 1em 0
     background-color #f6f6f7
+  @media print
+    display none
   ul
     display flex
     justify-content center
@@ -282,19 +291,35 @@ Main
   &
     display flex
     justify-content center
-    padding 5rem 2em 8rem
+    padding 5rem 2rem 8rem
     width 100%
-  address
+  @media print
+    padding .5rem 1rem
+    font-size .75rem
+  Address
     &
       position sticky
-      top 4rem
-      margin 4rem 1em 1em 0
+      top 4.25rem
+      margin 4.25rem 1em 1em 0
       width 10rem
       height fit-content
       font-family Gill Sans, Gill Sans Light, $ff-sans-generic
       font-weight 300
+    @media print
+      position relative
+      top 0
+      margin-top 3.5rem
+      margin-right .5rem
+      width 8rem
     input#zh--en:indeterminate ~ &
-      margin-top 7rem
+      &
+        margin-top 7.25rem
+      @media print
+        margin-top 2.5rem
+    input#zh--en:not(:indeterminate):checked ~ &
+      @media print
+        margin-top 3rem
+
     h1
       &
         display inline
@@ -327,6 +352,11 @@ Main
       position relative
       flex 1
       max-width 40em
+    @media print
+      &
+        line-height 1.25
+      input#zh--en:not(:indeterminate):checked ~ &
+        max-width 50em
     h1
       &
         display flex
@@ -337,6 +367,23 @@ Main
         line-height 1.5
         text-shadow 1px 1px 0 #eee
         color rgb(112, 125, 113)
+      @media print
+        &
+          font-size 1rem
+          color rgb(77, 77, 77)
+        input#zh--en:indeterminate ~ &
+          &
+            transform scale(.75)
+            transform-origin left top
+            margin-bottom -1em
+          &:lang(en)
+            display none
+          &::after
+            content 'Front-end developer'
+            margin-left .25em
+        & //:lang(en)
+          font-size .75rem
+          margin-bottom -.5em
       &:lang(zh-Hans)
         font-family Gill Sans, $ff-sans-generic-hans
       b
@@ -348,6 +395,10 @@ Main
           font-weight normal
           text-shadow none
           color rgb(27, 31, 25)
+          @media print
+            input#zh--en:indeterminate ~ &::after
+              content 'Yijun'
+              margin-left .25em
         &:lang(zh-Hans)
           font-family $ff-serif-generic-hans
         &:lang(en),
@@ -358,15 +409,32 @@ Main
     p + h2,
     p + h2 + h2,
     /input#zh--en:not(:indeterminate):checked ~ Main Article p + h2 + h2 + h2
-      margin-top 2em
+      &
+        margin-top 2em
+      @media print
+        &
+          margin-top 1.5em
+          //font-size .875rem
+        &:lang(en)
+          margin-top 1em
+        input#zh--en:indeterminate ~ &
+          margin-top .75em
     p + h3,
     p + h3 + h3,
     /input#zh--en:not(:indeterminate):checked ~ Main Article p + h3 + h3 + h3
-      margin-top 1.5em
+      &
+        margin-top 1.5em
+      @media print
+        &
+          margin-top 1em
+        &:lang(en)
+          margin-top .5em
     h2
       &
         font-family: $ff-serif-generic
         font-size 1.25rem
+      @media print
+        font-size .875rem
       &:lang(zh)
         letter-spacing .25em
       &:lang(zh-Hans)
@@ -374,12 +442,18 @@ Main
     h2 + h3,
     /input#hant--hans:checked ~ Main article h2 + h3 + h3,
     /input#zh--en:checked ~ Main article h2 + h3 + h3 + h3
-      margin-top .5em
+      &
+        margin-top .5em
+      @media print
+        &:lang(en)
+          margin-top 0
     h3
       &
         font-family DIN Alternate, DIN Alternate Bold, $ff-sans-generic
         font-size 1rem
         font-weight 600
+      @media print
+        font-size .75rem
       &:lang(zh-Hans)
         font-family DIN Alternate, DIN Alternate Bold, $ff-sans-generic-hans
       a[href="//mockingbot.com"]
@@ -390,7 +464,10 @@ Main
     p.period + p:not(.period)
     /input#zh--en:not(:checked) ~ Main article p.period + p:not(.period) + p:lang(zh):not(.period)
     /input#zh--en:checked ~ Main article p.period + p:not(.period) + p:lang(zh):not(.period) + p:lang(en):not(.period)
-      margin-top .5em
+      &
+        margin-top .5em
+      @media print
+        margin-top 0
     h3 + p:not(.period)
     /input#zh--en:not(:checked) ~ Main article h3 + p:not(.period) + p:lang(zh):not(.period)
     /input#zh--en:checked ~ Main article h3 + p:not(.period) + p:lang(zh):not(.period) + p:lang(en):not(.period)
@@ -403,6 +480,21 @@ Main
         color #7a8c7a
       &:lang(zh-Hans)
         font-family Gill Sans, $ff-sans-generic-hans
+      @media print
+        &
+          font-size .625rem
+          color #5e5e5e
+        &:lang(en)
+          margin 0 0 .125rem
+          line-height 1
+    p:not(.period):lang(en)
+      @media print
+        margin .5em 0
+    input#zh--en:indeterminate ~ & p:not(.period)
+      @media print
+        margin .25em 0 !important
+
+
 
 // ======
 // FOOTER
@@ -416,5 +508,7 @@ Body > Footer
     align-items center
     background-color #f6f6f7
     color #543252
+  @media print
+    display none
   p
     margin 0
