@@ -105,14 +105,14 @@ let toggles: Js.Array.t<toggle> = [
   { id: "zh--en", label: `中文/English`, lang: #inherit, indeterminable: true },
   { id: "hant--hans", label: `繁/简`, lang: #zh, indeterminable: false },
 
-  { id: "dark--light", label: `深/淺模式`, lang: #zh, indeterminable: false },
-  { id: "dark--light", label: `Dark/light mode`, lang: #en, indeterminable: false },
-
   { id: "sans-serif--serif", label: `方體/宋體`, lang: #zh, indeterminable: false },
   { id: "sans-serif--serif", label: `Sans-serif/serif`, lang: #en, indeterminable: false },
 
   // { id: "f-left--justified", label: `Flush left/justified`, lang: #en, indeterminable: false },
   // { id: "horizontal--vertical", label: `橫排/縱排`, lang: #zh, indeterminable: false },
+
+  { id: "dark--light", label: `深/淺模式`, lang: #zh, indeterminable: false },
+  { id: "dark--light", label: `Dark/light mode`, lang: #en, indeterminable: false },
 ]
 
 let toggles_by_id =
@@ -269,6 +269,8 @@ let make = () => {
 
     /* Main content: */
     <main>
+      <article dangerouslySetInnerHTML={{ "__html": getResumeHTML() }} />
+
       <address>
         <h1 lang="zh">{ H.s(`聯繫方式`) }</h1>
         <h1 lang="en">{ H.s(`Contact`) }</h1>
@@ -290,8 +292,6 @@ let make = () => {
             <dd><Link to="tel:+88697827****">{ H.s("+886-978-27****") }</Link></dd>
         </dl>
       </address>
-
-      <article dangerouslySetInnerHTML={{ "__html": getResumeHTML() }} />
     </main>
 
     /* Page footer: */
