@@ -4,7 +4,7 @@
   "description": "Yijun’s",
   "type": "module",
   "scripts": {
-    "start": "npx rescript build -w && npx http-server public --port=8000",
+    "start": "npx http-server public --port=8888",
     "build": "npx rescript"
   },
   "author": "Chen Yijun",
