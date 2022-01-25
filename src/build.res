@@ -6,6 +6,7 @@ module Fs = {
   @module("fs") external rmSync: (string, o) => unit = "rmSync"
   @module("fs") external mkdirSync: (string, o) => unit = "mkdirSync"
   @module("fs") external writeFileSync: (string, string, p) => unit = "writeFileSync"
+  @module("fs") external copyFileSync: (string, string) => unit = "copyFileSync"
 }
 
 // 1. Clean up the `/public` directory:
@@ -54,9 +55,8 @@ ${ raw -> Js.String2.trim }
 </body>
 </html>`
 
-      let absPath = H.joinOutputPaths(path)
-      let absFilePath = H.joinOutputPaths(`${path}/index.html`)
+      H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
+      H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })
 
-      absPath -> Fs.mkdirSync({ recursive: true, force: false })
-      absFilePath -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })
+      H.joinAssetsPaths(`favicon.svg`) -> Fs.copyFileSync(H.joinOutputPaths(`favicon.svg`))
     })

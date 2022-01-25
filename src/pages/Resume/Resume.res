@@ -215,9 +215,9 @@ let make = () => {
   <>
     <Helmet>
       <body className=`Résumé` />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-      <title>{ H.s(`陳奕鈞的簡歷・Chen Yijun’s Résumé`) }</title>
+      <title>{ H.s(`陳奕鈞 ${year}・Chen Yijun’s Résumé ${year}`) }</title>
 
       <style>{ css }</style>
       <script>{ script }</script>
