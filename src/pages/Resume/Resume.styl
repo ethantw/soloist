@@ -73,24 +73,23 @@ P:lang(zh)
 // ======
 Body > Header
   &
-    padding .5em 1em 0
+    position fixed
+    padding 12em 0 1em
+    height 100vh
     background-color #f6f6f7
+    box-shadow #eee -3px 0 10px inset
   @media print
     display none
   ul
-    display flex
-    justify-content center
-    align-items center
     margin 0
+    padding 0 .25em
     list-style none
   li
-    &
-      margin 0
-      transition .25s all ease-out
-    &:not(:last-child)
-      //margin-right 1em
+    margin 0 0 1.5em
+    transition .25s all ease-out
   button
     display none
+
 // ======================
 // TOGGLES IN THE HEADERS
 // ======================
@@ -187,7 +186,7 @@ for toggle-id in "zh--en" "hant--hans" "dark--light" "sans-serif--serif" "horizo
 input#zh--en:not(:checked) ~ header ul li:lang(en)
 input#zh--en:checked ~ header ul li:lang(zh):not(:first-child)
   display none
-input#zh--en:checked ~ header ul li.hant--hans:lang(zh)
+input#zh--en:not(:indeterminate):checked ~ header ul li.hant--hans:lang(zh)
   &
     position relative
     display list-item
@@ -291,7 +290,7 @@ Main
   &
     display flex
     justify-content center
-    padding 5rem 2rem 8rem
+    padding 5rem 2rem 12rem
     width 100%
   @media print
     padding .5rem 1rem
