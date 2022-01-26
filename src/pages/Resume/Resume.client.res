@@ -6,15 +6,18 @@ type event
 
 @send external getElmtById: ('a, string) => 'a = "getElementById"
 @send external qSA: ('a, string) => Js.Array2.array_like<'a> = "querySelectorAll"
+@send external qS: ('a, string) => 'a = "querySelector"
 
 @send external getAttr: (element, string) => string = "getAttribute"
 
 @val external doc: 'a = "document"
+@val external win: 'a = "window"
 
 aEL(
   doc,
   "DOMContentLoaded",
   _ => {
+    // `:inderterminate` toggles
     let indeterminable_inputs = qSA(doc, `input[type="checkbox"].indeterminable`)
 
     indeterminable_inputs 
@@ -48,5 +51,15 @@ aEL(
         )
       }
     )
+
+    // Printer:
+    let p = qS(doc, ".Printer")
+
+    aEL(
+      p,
+      "click",
+      (_e) => win["print"](),
+    )
+
   },
 )

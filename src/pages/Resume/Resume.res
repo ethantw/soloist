@@ -4,6 +4,13 @@
 let css = Stylus.from(%raw("style"))
 let script = %raw("clientScript") -> H.s
 
+let year =
+  Js.Date.make()
+  -> Js.Date.getFullYear
+  -> Js.String2.make
+
+let title = H.s(`陳奕鈞 ` ++ year ++  `・Chen Yijun’s Résumé ` ++ year)
+
 module Cheerio = {
   // Referred from:
   // https://forum.rescript-lang.org/t/typing-cheerio-js/2833/2
@@ -89,10 +96,6 @@ let formatDateInZh = (date: string) => {
   year ++ month
 }
 
-let year =
-  Js.Date.make()
-  -> Js.Date.getFullYear
-  -> Js.String2.make
 
 type toggle = {
   id: string,
@@ -217,7 +220,7 @@ let make = () => {
       <body className=`Résumé` />
       <link rel="icon" href="/favicon.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-      <title>{ H.s(`陳奕鈞 ${year}・Chen Yijun’s Résumé ${year}`) }</title>
+      <title>{ title }</title>
 
       <style>{ css }</style>
       <script>{ script }</script>
@@ -262,8 +265,13 @@ let make = () => {
           -> React.array
         }
 
-        <li><button>{ H.s(`列印`) }</button></li>
-        <li lang="en"><button>{ H.s(`Print`) }</button></li>
+        <li className="Printer">
+          <button>
+            <span lang="zh">{ H.s(`列印`) }</span>
+            <span lang="en">{ H.s(`Print`) }</span>
+            <Printer />
+          </button>
+        </li>
       </ul>
     </header>
 

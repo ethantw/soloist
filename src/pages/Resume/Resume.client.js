@@ -104,7 +104,7 @@
       input.checked = true;
     });
     var indeterminable_labels = document.querySelectorAll("label.indeterminable");
-    return forEach(Array.from(indeterminable_labels), function(label) {
+    forEach(Array.from(indeterminable_labels), function(label) {
       var htmlFor = label.getAttribute("for");
       var input = document.getElementById(htmlFor);
       label.addEventListener("click", function(e) {
@@ -116,6 +116,10 @@
           return;
         }
       });
+    });
+    var p = document.querySelector(".Printer");
+    p.addEventListener("click", function(_e) {
+      return _1(window.print, void 0);
     });
   });
 })();

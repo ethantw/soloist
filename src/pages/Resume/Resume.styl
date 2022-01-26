@@ -87,8 +87,23 @@ Body > Header
   li
     margin 0 0 1.5em
     transition .25s all ease-out
-  button
-    display none
+  .Printer
+    &
+      position relative
+      margin 3em auto .5em
+      width 1em
+      height @width
+      overflow hidden
+      font-size 2rem
+    button
+      opacity .8
+      transition .15s all ease-out
+    button:hover
+      opacity 1
+    span
+      position absolute
+      opacity 0
+
 
 // ======================
 // TOGGLES IN THE HEADERS
