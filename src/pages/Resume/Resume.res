@@ -9,46 +9,7 @@ let year =
   -> Js.Date.getFullYear
   -> Js.String2.make
 
-let title = H.s(`陳奕鈞 ` ++ year ++  `・Chen Yijun’s Résumé ` ++ year)
-
-module Cheerio = {
-  // Referred from:
-  // https://forum.rescript-lang.org/t/typing-cheerio-js/2833/2
-
-  type cheerio
-  type element
-  type selector
-  type t<'a> = (. selector) => element
-
-  @module("cheerio") external load: string => t<cheerio> = "load"
-
-  external string: string => selector = "%identity"
-  external element: element => selector = "%identity"
-
-  @send external getHTML: t<cheerio> => string = "html"
-  @send external getHTMLOfElement: element => string = "html"
-  @send external setHTML: (element, string) => element = "html"
-
-  @send external getText: element => string = "text"
-  @send external setText: (element, string) => element = "text"
-
-  @send external getAttr: (element, string) => string = "attr"
-  @send external setAttr: (element, string, string) => element = "attr"
-
-  @send external add: (element, string) => element = "add"
-  @send external addClass: (element, string) => element = "addClass"
-  @send external clone: (element) => element = "clone"
-
-  @send external after: (element, string) => element = "after"
-  @send external insertAfter: (element, element) => element = "insertAfter"
-  @send external is: (element, string) => element = "is"
-
-  @send external each: (element, (int, element) => element) => element = "each"
-  @send external filter: (element, string) => element = "filter"
-  @send external parent: (element, string) => element = "parent"
-  @send external next: (element, string) => element = "next"
-  @send external nextUntil: (element, string) => element = "nextUntil"
-}
+let title = H.s(`陳奕鈞 ${year}・Chen Yijun’s Résumé ${year} `)
 
 let mapDigitToZhChar = d => switch d {
   | `0` => `〇`
@@ -250,14 +211,14 @@ let make = () => {
                 <li key={id} className={id}>
                   <label htmlFor={id} className={indeterminable ? "indeterminable" : ""}>
                     { H.s(label) }
-                    <Toggle />
+                    <Icon name="toggle" />
                   </label>
                 </li>
               | _ =>
                 <li key={id ++ (lang :> string)} lang={lang :> string} className={id}>
                   <label htmlFor={id} className={indeterminable ? "indeterminable" : ""}>
                     { H.s(label) }
-                    <Toggle />
+                    <Icon name="toggle" />
                   </label>
                 </li>
             }
@@ -269,7 +230,7 @@ let make = () => {
           <button>
             <span lang="zh">{ H.s(`列印`) }</span>
             <span lang="en">{ H.s(`Print`) }</span>
-            <Printer />
+            <Icon name="printer" />
           </button>
         </li>
       </ul>
@@ -304,7 +265,7 @@ let make = () => {
 
     /* Page footer: */
     <footer>
-      <p hidden={true}>{ H.s(`© ${year}`) }</p>
+      <p hidden={true}>{ H.s(`© ${year} `) }</p>
     </footer>
   </>
 }

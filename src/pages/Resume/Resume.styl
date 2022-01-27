@@ -74,15 +74,19 @@ P:lang(zh)
 Body > Header
   &
     position fixed
-    padding 12em 0 1em
+    padding 1em 0
     height 100vh
     background-color #f6f6f7
     box-shadow #eee -3px 0 10px inset
   @media print
     display none
   ul
+    display flex
+    flex-direction column
+    align-items center
     margin 0
-    padding 0 .25em
+    padding 11.5em .25em 1em
+    height 100%
     list-style none
   li
     margin 0 0 1.5em
@@ -90,7 +94,8 @@ Body > Header
   .Printer
     &
       position relative
-      margin 3em auto .5em
+      margin-top auto 
+      margin-bottom 0
       width 1em
       height @width
       overflow hidden

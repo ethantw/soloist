@@ -1,5 +1,3 @@
-import { stylusLoader } from 'esbuild-stylus-loader'
-
 const __DIST__ = 'public'
 
 const config = {
