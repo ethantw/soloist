@@ -79,6 +79,11 @@ Label
   cursor pointer
 P:lang(zh)
   text-align justify
+P:lang(en)
+  @media screen and (max-width: 640px)
+    -webkit-hyphens auto
+    hyphens auto
+    text-align justify
 
 // ======
 // HEADER
@@ -97,13 +102,16 @@ Body > Header
   @media print
     display none
   ul
-    display flex
-    flex-direction column
-    align-items center
-    margin 0
-    padding 10em .25em 1em
-    height 100%
-    list-style none
+    &
+      display flex
+      flex-direction column
+      align-items center
+      margin 0
+      padding 10.25em .25em 1em
+      height 100%
+      list-style none
+    @media screen and (max-width: 640px)
+      padding-top 5.25em
   li
     margin 0 0 1.5em
     transition .25s all ease-out
@@ -116,6 +124,8 @@ Body > Header
       height @width
       overflow hidden
       font-size 2rem
+    @media screen and (max-width: 768px)
+      display none
     button
       opacity .8
       transition .15s all ease-out
@@ -138,6 +148,8 @@ Body > Header label
     width 4.5rem
     font 0/0 Arial
     color transparent
+  @media screen and (max-width: 640px)
+    width 3rem
   &::before
   &::after
     position absolute
@@ -165,12 +177,15 @@ Body > Header label
 $toggle-inactive-text
 $toggle-active-text
 $toggle-neither-text
-  background-color #939393
-  color transparent
-  text-shadow 2px 2px 3px rgba(255,255,255,.5)
-  -webkit-background-clip text
-  -moz-background-clip text
-  background-clip text
+  &
+    background-color #939393
+    color transparent
+    text-shadow 2px 2px 3px rgba(255,255,255,.5)
+    -webkit-background-clip text
+    -moz-background-clip text
+    background-clip text
+  @media screen and (max-width: 640px)
+    font-size .875rem
 $toggle-text-shadow-in-dark
   &::before, &::after
     text-shadow -1px 1px 2px rgba(45,51,59,.5) !important
@@ -333,9 +348,13 @@ Main
   &
     display flex
     justify-content center
-    padding 10rem 2rem 12rem
+    padding 10rem 2rem 12rem 5rem
     width 100%
     transition .15s all ease-out
+  @media screen and (max-width: 768px)
+    padding-right 0
+  @media screen and (max-width: 640px)
+    padding 5rem 0 12rem 3.5rem
   @media not print
     input#light--dark:checked ~ &
       background-color rgb(13,25,12)
@@ -345,7 +364,7 @@ Main
     input#sans-serif--serif:checked ~ input#light--dark:checked ~ & Article
       font-family $ff-serif-generic-thin
   @media print
-    padding 4rem 1rem 0rem
+    padding 4rem 1rem 0
     font-size .75rem
   Address
     &
@@ -353,11 +372,19 @@ Main
       position sticky
       top 4.25rem
       margin 0 1em 1em 0
-      padding-top 1em
-      width 10rem
+      padding 1em .5em 1em 2em
+      width 12rem
       height fit-content
       font-family Gill Sans, Gill Sans Light, $ff-sans-generic
       font-weight 300
+    @media screen and (max-width: 768px)
+      margin-right 0
+      width 10rem
+    @media screen and (max-width: 640px)
+      position absolute
+      left 3.5rem
+      padding 2em .5em 1em 1rem
+      font-size .875rem
     @media print
       position relative
       top 0
@@ -370,12 +397,17 @@ Main
         font-family: Optima, $ff-serif-generic
         font-size 1em
         font-weight normal
+      @media screen and (max-width: 640px)
+        font-size .75rem
       /input#zh--en:not(:indeterminate):not(:checked) ~ &:lang(en)
       /input#zh--en:not(:indeterminate):checked ~ &:lang(zh)
         display none
 
     dl
-      margin .5em 0
+      &
+        margin .5em 0
+      @media screen and (max-width: 640px)
+        margin 0
     dt
       position absolute
       z-index -10
@@ -386,9 +418,15 @@ Main
       content ' '
       font-size .875em
     dd
-      margin-bottom .25rem
+      &
+        margin-bottom .25em
+      @media screen and (max-width: 640px)
+        margin-bottom 0
     dd:last-child
-      margin-top 1rem
+      &
+        margin-top 1em
+      @media screen and (max-width: 640px)
+        margin-top 0
 
   h1, h2, h3, h4, h5, h6, p.period
     margin 0
@@ -399,6 +437,15 @@ Main
       position relative
       flex 1
       max-width 40em
+    @media screen and (max-width: 768px)
+      padding-left 1.5rem
+      padding-right 1.5rem
+    @media screen and (max-width: 640px)
+      margin-right auto
+      padding-top 6rem
+      padding-left 1rem
+      padding-right 1rem
+      font-size .875rem
     @media print
       &
         line-height 1.25
@@ -409,8 +456,6 @@ Main
         position absolute
         top 0
         left 0
-        display flex
-        align-items baseline
         transform translateY(-100%)
         font-size 1.25rem
         font-family Gill Sans, $ff-sans-generic
@@ -418,6 +463,11 @@ Main
         line-height 1.5
         text-shadow 1px 1px 0 #eee
         color rgb(112, 125, 113)
+      @media screen and (max-width: 768px)
+        left 1.5rem
+      @media screen and (max-width: 640px)
+        left 1rem
+        font-size .875rem
       @media not print
         input#zh--en:indeterminate ~ &:lang(zh)
           transform translateY(-200%)
@@ -441,13 +491,18 @@ Main
         font-family Gill Sans, $ff-sans-generic-hans
       b
         &
-          display block
+          display inline-block
           margin-right .25em
           font-family $ff-serif-generic
           font-size 2rem
           font-weight normal
           text-shadow none
           color rgb(27, 31, 25)
+        @media screen and (max-width: 640px)
+          &
+            font-size 1.25rem
+          &:lang(en)
+            margin-right 0
         @media not print
           input#light--dark:checked ~ &
             color rgb(189, 188, 188)
@@ -477,7 +532,6 @@ Main
       @media print
         &
           margin-top 1.5em
-          //font-size .875rem
         &:lang(en)
           margin-top 1em
         input#zh--en:indeterminate ~ &
@@ -496,6 +550,8 @@ Main
       &
         font-family: $ff-serif-generic
         font-size 1.25rem
+      @media screen and (max-width: 640px)
+        font-size 1rem
       @media print
         font-size .875rem
       &:lang(zh)
@@ -515,6 +571,8 @@ Main
         font-family DIN Alternate, DIN Alternate Bold, $ff-sans-generic
         font-size 1rem
         font-weight 600
+      @media screen and (max-width: 640px)
+        font-size .875rem
       @media print
         font-size .75rem
       &:lang(zh-Hans)

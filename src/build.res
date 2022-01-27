@@ -54,6 +54,7 @@ ${body}
 ${ raw -> Js.String2.trim }
 </body>
 </html>`
+  -> Js.String2.replaceByRe(%re(`/\sdata\-react\-helmet="true"/g`), "")
 
       H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
       H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })

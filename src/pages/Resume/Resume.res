@@ -256,9 +256,11 @@ let make = () => {
           <dt lang="en">{ H.s(`Homepage`) }</dt>
             <dd><Link target="_blank" to="//yijun.me">{ H.s("Yijun.me") }</Link></dd>
 
+          /*
           <dt lang="zh">{ H.s(`手機`) }</dt>
           <dt lang="en">{ H.s(`Mobile`) }</dt>
             <dd><Link to="tel:+88697827****">{ H.s("+886-978-27****") }</Link></dd>
+          */
         </dl>
       </address>
     </main>
