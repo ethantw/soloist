@@ -75,8 +75,8 @@ let toggles: Js.Array.t<toggle> = [
   // { id: "f-left--justified", label: `Flush left/justified`, lang: #en, indeterminable: false },
   // { id: "horizontal--vertical", label: `橫排/縱排`, lang: #zh, indeterminable: false },
 
-  { id: "dark--light", label: `深/淺模式`, lang: #zh, indeterminable: false },
-  { id: "dark--light", label: `Dark/light mode`, lang: #en, indeterminable: false },
+  { id: "light--dark", label: `深/淺模式`, lang: #zh, indeterminable: false },
+  { id: "light--dark", label: `Dark/light mode`, lang: #en, indeterminable: false },
 ]
 
 let toggles_by_id =

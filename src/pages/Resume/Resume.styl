@@ -1,15 +1,19 @@
 $ff-sans-latin         = Avenir Next, Helvetica Neue, Helvetica, Arial
 $ff-sans-hant          = YuGothic, Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Sans GB, Noto Sans CJK KR, Noto Sans CJK JP
 $ff-sans-hans          = Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans CN
+$ff-sans-hant-thin     = Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Sans GB, Noto Sans CJK KR, Noto Sans CJK JP
 
 $ff-sans-generic       = $ff-sans-latin, $ff-sans-hant, sans-serif
+$ff-sans-generic-thin  = $ff-sans-latin, $ff-sans-hant-thin, sans-serif
 $ff-sans-generic-hans  = $ff-sans-latin, $ff-sans-hans, sans-serif
 
 $ff-serif-latin        = Didot
 $ff-serif-hant         = YuMincho, Hiragino Mincho ProN, Noto Serif CJK KR, Noto Serif CJK JP, Source Han Serif KR, Source Han Serif JP
 $ff-serif-hans         = Noto Serif CJK SC, Source Han Serif CN
+$ff-serif-hant-thin    = Hiragino Mincho ProN, Noto Serif CJK KR, Noto Serif CJK JP, Source Han Serif KR, Source Han Serif JP
 
 $ff-serif-generic      = $ff-serif-latin, $ff-serif-hant, serif
+$ff-serif-generic-thin = $ff-serif-latin, $ff-serif-hant-thin, serif
 $ff-serif-generic-hans = $ff-serif-latin, $ff-serif-hans, serif
 
 HTML
@@ -46,6 +50,14 @@ A
     color lighten(#777, 30%)
   &:active
     color darken(#777, 10%)
+  input#light--dark:checked ~ Main &
+    @media not print
+      &
+        color rgb(95, 140, 98)
+      &:hover
+        color rgb(70, 192, 76)
+      &:active
+        color darken(rgb(95, 140, 98), 10%)
 
 Address
   font-style inherit
@@ -78,6 +90,10 @@ Body > Header
     height 100vh
     background-color #f6f6f7
     box-shadow #eee -3px 0 10px inset
+  /input#light--dark:checked ~ Header
+    @media not print
+      background-color rgb(45, 51, 59)
+      box-shadow rgba(47,47,47,.6) -3px 0 10px inset
   @media print
     display none
   ul
@@ -155,6 +171,9 @@ $toggle-neither-text
   -webkit-background-clip text
   -moz-background-clip text
   background-clip text
+$toggle-text-shadow-in-dark
+  &::before, &::after
+    text-shadow -1px 1px 2px rgba(45,51,59,.5) !important
 $toggle-active-text
   background-color rgb(143, 201, 62)
 $toggle-neither-text
@@ -195,13 +214,17 @@ $toggle-neither
 #ball
   transition .15s all ease-out
 
-for toggle-id in "zh--en" "hant--hans" "dark--light" "sans-serif--serif" "horizontal--vertical" "f-left--justified"
+for toggle-id in "zh--en" "hant--hans" "light--dark" "sans-serif--serif" "horizontal--vertical" "f-left--justified"
   input#{toggle-id}:indeterminate ~ header label[for={s("%s", toggle-id)}]
     @extends $toggle-neither
   input#{toggle-id}:not(:indeterminate):not(:checked) ~ header label[for={s("%s", toggle-id)}]
     @extends $toggle-upward
   input#{toggle-id}:not(:indeterminate):checked ~ header label[for={s("%s", toggle-id)}]
     @extends $toggle-downward
+
+input#light--dark:checked ~ header label
+  @media not print
+    @extends $toggle-text-shadow-in-dark
 
 input#zh--en:not(:checked) ~ header ul li:lang(en)
 input#zh--en:checked ~ header ul li:lang(zh):not(:first-child)
@@ -227,7 +250,7 @@ label[for="hant--hans"]
     content '繁'
   &::after
     content '简'
-label[for="dark--light"]
+label[for="light--dark"]
   &:lang(zh)::before
     content '淺'
     @extends $toggle-label-in-zh
@@ -312,6 +335,15 @@ Main
     justify-content center
     padding 10rem 2rem 12rem
     width 100%
+    transition .15s all ease-out
+  @media not print
+    input#light--dark:checked ~ &
+      background-color rgb(13,25,12)
+      color rgb(201, 209, 217)
+      font-family $ff-sans-generic-thin
+      font-weight 200
+    input#sans-serif--serif:checked ~ input#light--dark:checked ~ & Article
+      font-family $ff-serif-generic-thin
   @media print
     padding 4rem 1rem 0rem
     font-size .75rem
@@ -389,6 +421,9 @@ Main
       @media not print
         input#zh--en:indeterminate ~ &:lang(zh)
           transform translateY(-200%)
+        input#light--dark:checked ~ &
+          text-shadow none
+          color rgb(95, 140, 98)
       @media print
         &
           font-size 1rem
@@ -413,18 +448,26 @@ Main
           font-weight normal
           text-shadow none
           color rgb(27, 31, 25)
-          @media print
-            &
-              font-size 1.5rem
-            input#zh--en:indeterminate ~ &::after
-              content 'Yijun'
-              margin-left .25em
+        @media not print
+          input#light--dark:checked ~ &
+            color rgb(189, 188, 188)
+        @media print
+          &
+            font-size 1.5rem
+          input#zh--en:indeterminate ~ &::after
+            content 'Yijun'
+            margin-left .25em
         &:lang(zh-Hans)
           font-family $ff-serif-generic-hans
         &:lang(en),
         &:lang(zh)::first-letter
-          font-weight bolder
-          color #485043
+          &
+            font-weight bolder
+            color #485043
+          input#light--dark:checked ~ &
+            @media not print
+              font-weight 500
+              color #7cac7c
 
     p + h2,
     p + h2 + h2,
@@ -500,6 +543,9 @@ Main
         color #7a8c7a
       &:lang(zh-Hans)
         font-family Gill Sans, $ff-sans-generic-hans
+      input#light--dark:checked ~ &
+        @media not print
+          color #7cac7c
       @media print
         &
           font-size .625rem
@@ -513,8 +559,10 @@ Main
     input#zh--en:indeterminate ~ & p:not(.period)
       @media print
         margin .25em 0 !important
-
-
+  @media not print
+    input#light--dark:checked ~ &
+      h2, h3
+        font-weight 500
 
 // ======
 // FOOTER
