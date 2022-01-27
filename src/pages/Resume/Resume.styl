@@ -85,7 +85,7 @@ Body > Header
     flex-direction column
     align-items center
     margin 0
-    padding 11.5em .25em 1em
+    padding 10em .25em 1em
     height 100%
     list-style none
   li
@@ -310,17 +310,18 @@ Main
   &
     display flex
     justify-content center
-    padding 5rem 2rem 12rem
+    padding 10rem 2rem 12rem
     width 100%
   @media print
-    padding .5rem 1rem
+    padding 4rem 1rem 0rem
     font-size .75rem
   Address
     &
       order 1
       position sticky
       top 4.25rem
-      margin 4.25rem 1em 1em 0
+      margin 0 1em 1em 0
+      padding-top 1em
       width 10rem
       height fit-content
       font-family Gill Sans, Gill Sans Light, $ff-sans-generic
@@ -328,17 +329,8 @@ Main
     @media print
       position relative
       top 0
-      margin-top 3.5rem
       margin-right .5rem
       width 8rem
-    input#zh--en:indeterminate ~ &
-      &
-        margin-top 7.25rem
-      @media print
-        margin-top 2.5rem
-    input#zh--en:not(:indeterminate):checked ~ &
-      @media print
-        margin-top 3rem
 
     h1
       &
@@ -382,29 +374,32 @@ Main
         max-width 50em
     h1
       &
+        position absolute
+        top 0
+        left 0
         display flex
         align-items baseline
+        transform translateY(-100%)
         font-size 1.25rem
         font-family Gill Sans, $ff-sans-generic
         font-weight normal
         line-height 1.5
         text-shadow 1px 1px 0 #eee
         color rgb(112, 125, 113)
+      @media not print
+        input#zh--en:indeterminate ~ &:lang(zh)
+          transform translateY(-200%)
       @media print
         &
           font-size 1rem
           color rgb(77, 77, 77)
         input#zh--en:indeterminate ~ &
-          &
-            transform scale(.75)
-            transform-origin left top
-            margin-bottom -1em
           &:lang(en)
             display none
           &::after
             content 'Front-end developer'
             margin-left .25em
-        & //:lang(en)
+        &
           font-size .75rem
           margin-bottom -.5em
       &:lang(zh-Hans)
@@ -419,6 +414,8 @@ Main
           text-shadow none
           color rgb(27, 31, 25)
           @media print
+            &
+              font-size 1.5rem
             input#zh--en:indeterminate ~ &::after
               content 'Yijun'
               margin-left .25em
