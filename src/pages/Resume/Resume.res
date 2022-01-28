@@ -9,7 +9,10 @@ let year =
   -> Js.Date.getFullYear
   -> Js.String2.make
 
-let title = H.s(`陳奕鈞 ${year}・Chen Yijun’s Résumé ${year} `)
+let title =
+  `陳奕鈞 ${year}・Chen Yijun’s Résumé ${year} `
+  -> Js.String2.trim
+  -> H.s
 
 let mapDigitToZhChar = d => switch d {
   | `0` => `〇`
@@ -56,38 +59,6 @@ let formatDateInZh = (date: string) => {
 
   year ++ month
 }
-
-
-type toggle = {
-  id: string,
-  label: string,
-  lang: [#zh | #en | #inherit],
-  indeterminable: bool,
-}
-
-let toggles: Js.Array.t<toggle> = [
-  { id: "zh--en", label: `中文/English`, lang: #inherit, indeterminable: true },
-  { id: "hant--hans", label: `繁/简`, lang: #zh, indeterminable: false },
-
-  { id: "sans-serif--serif", label: `方體/宋體`, lang: #zh, indeterminable: false },
-  { id: "sans-serif--serif", label: `Sans-serif/serif`, lang: #en, indeterminable: false },
-
-  // { id: "f-left--justified", label: `Flush left/justified`, lang: #en, indeterminable: false },
-  // { id: "horizontal--vertical", label: `橫排/縱排`, lang: #zh, indeterminable: false },
-
-  { id: "light--dark", label: `深/淺模式`, lang: #zh, indeterminable: false },
-  { id: "light--dark", label: `Dark/light mode`, lang: #en, indeterminable: false },
-]
-
-let toggles_by_id =
-  toggles
-  -> Belt.Array.reduce(
-      Js.Dict.empty(),
-      (acc, t) => {
-        acc -> Js.Dict.set(t.id, t)
-        acc
-      },
-    )
 
 // 1. Deal with time periods:
 //   a. Find all time periods and add classes;
@@ -189,7 +160,7 @@ let make = () => {
 
     /* Real toggles behind the scene */
     {
-      toggles_by_id
+      Toggles.togglesById
       -> Js.Dict.values
       -> Belt.Array.map(
           ({ id, indeterminable }) => switch indeterminable {
@@ -204,7 +175,7 @@ let make = () => {
     <header>
       <ul>
         {
-          toggles
+          Toggles.toggles
           -> Belt.Array.map(({ id, lang, label, indeterminable }) =>
             switch lang {
               | #inherit =>

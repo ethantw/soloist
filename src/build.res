@@ -9,6 +9,11 @@ module Fs = {
   @module("fs") external copyFileSync: (string, string) => unit = "copyFileSync"
 }
 
+module Minifier = {
+  type o = { collapseWhitespace: bool }
+  @module("html-minifier") external minify: (string, o) => string = "minify"
+}
+
 // 1. Clean up the `/public` directory:
 Fs.rmSync(H.outputPath, { recursive: true, force: true })
 
@@ -55,6 +60,7 @@ ${ raw -> Js.String2.trim }
 </body>
 </html>`
   -> Js.String2.replaceByRe(%re(`/\sdata\-react\-helmet="true"/g`), "")
+  -> Minifier.minify({ collapseWhitespace: true })
 
       H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
       H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })

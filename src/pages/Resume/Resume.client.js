@@ -98,13 +98,13 @@
 
   // src/pages/Resume/Resume.client.bs.js
   document.addEventListener("DOMContentLoaded", function(param) {
-    var indeterminable_inputs = document.querySelectorAll('input[type="checkbox"].indeterminable');
-    forEach(Array.from(indeterminable_inputs), function(input) {
+    var indeterminableInputs = Array.from(document.querySelectorAll('input[type="checkbox"].indeterminable'));
+    forEach(indeterminableInputs, function(input) {
       input.indeterminate = true;
       input.checked = true;
     });
-    var indeterminable_labels = document.querySelectorAll("label.indeterminable");
-    forEach(Array.from(indeterminable_labels), function(label) {
+    var indeterminableLabels = document.querySelectorAll("label.indeterminable");
+    forEach(Array.from(indeterminableLabels), function(label) {
       var htmlFor = label.getAttribute("for");
       var input = document.getElementById(htmlFor);
       label.addEventListener("click", function(e) {
@@ -117,9 +117,27 @@
         }
       });
     });
-    var p = document.querySelector(".Printer");
-    p.addEventListener("click", function(_e) {
+    document.querySelector(".Printer").addEventListener("click", function(_e) {
       return _1(window.print, void 0);
+    });
+    var darkBySystemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return forEach(Array.from(document.querySelectorAll('input[type="checkbox"]')), function(input) {
+      var id = input.id;
+      var prevPref = localStorage.getItem(id);
+      var tmp;
+      var exit = 0;
+      if (id === "light--dark" && prevPref === null) {
+        tmp = darkBySystemPref;
+      } else {
+        exit = 1;
+      }
+      if (exit === 1) {
+        tmp = prevPref !== null ? prevPref === "true" : false;
+      }
+      input.checked = tmp;
+      input.addEventListener("click", function(_e) {
+        localStorage.setItem(id, input.checked ? "true" : "false");
+      });
     });
   });
 })();
