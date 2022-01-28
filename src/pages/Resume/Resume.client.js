@@ -98,36 +98,31 @@
 
   // src/pages/Resume/Resume.client.bs.js
   document.addEventListener("DOMContentLoaded", function(param) {
-    var indeterminableInputs = Array.from(document.querySelectorAll('input[type="checkbox"].indeterminable'));
-    forEach(indeterminableInputs, function(input) {
-      input.indeterminate = true;
-      input.checked = true;
-    });
-    var indeterminableLabels = document.querySelectorAll("label.indeterminable");
-    forEach(Array.from(indeterminableLabels), function(label) {
-      var htmlFor = label.getAttribute("for");
-      var input = document.getElementById(htmlFor);
-      label.addEventListener("click", function(e) {
-        var match = input.checked;
-        var match$1 = input.indeterminate;
-        if (match && !match$1) {
-          e.preventDefault();
-          input.indeterminate = true;
-          return;
-        }
+    var han = window.Han;
+    han.renderHanging();
+    han.renderJiya();
+    han.renderHWS();
+    var printer = document.querySelector(".Printer");
+    if (!(printer == null)) {
+      printer.addEventListener("click", function(_e) {
+        return _1(window.print, void 0);
       });
-    });
-    document.querySelector(".Printer").addEventListener("click", function(_e) {
-      return _1(window.print, void 0);
-    });
+    }
     var darkBySystemPref = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return forEach(Array.from(document.querySelectorAll('input[type="checkbox"]')), function(input) {
+    forEach(Array.from(document.querySelectorAll('input[type="checkbox"]')), function(input) {
       var id = input.id;
+      var indeterminable = input.classList.contains("indeterminable");
       var prevPref = localStorage.getItem(id);
       var tmp;
       var exit = 0;
-      if (id === "light--dark" && prevPref === null) {
-        tmp = darkBySystemPref;
+      if (id === "light--dark") {
+        if (prevPref !== null) {
+          exit = 1;
+        } else {
+          tmp = darkBySystemPref;
+        }
+      } else if (indeterminable && prevPref === null) {
+        tmp = true;
       } else {
         exit = 1;
       }
@@ -135,9 +130,26 @@
         tmp = prevPref !== null ? prevPref === "true" : false;
       }
       input.checked = tmp;
+      input.indeterminate = indeterminable ? prevPref !== null ? prevPref === "indeterminate" : true : false;
       input.addEventListener("click", function(_e) {
         localStorage.setItem(id, input.checked ? "true" : "false");
       });
+      var label = document.querySelector("label.indeterminable[for=" + id + "]");
+      if (!(label == null)) {
+        label.addEventListener("click", function(e) {
+          var match = input.checked;
+          var match$1 = input.indeterminate;
+          if (match && !match$1) {
+            e.preventDefault();
+            input.indeterminate = true;
+            localStorage.setItem(id, "indeterminate");
+            return;
+          }
+        });
+        return;
+      }
     });
+    var body = document.body;
+    body.classList.add("ready");
   });
 })();

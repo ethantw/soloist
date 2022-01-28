@@ -63,11 +63,14 @@ ${ raw -> Js.String2.trim }
   -> Minifier.minify({
       collapseWhitespace: true,
       minifyCSS: true,
-      minifyJS: true,
+      minifyJS: false,
     })
 
       H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
+      H.joinOutputPaths(`fonts`) -> Fs.mkdirSync({ recursive: true, force: false })
+
       H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })
 
       H.joinAssetsPaths(`favicon.svg`) -> Fs.copyFileSync(H.joinOutputPaths(`favicon.svg`))
+      H.joinAssetsPaths(`fonts/han-space.woff2`) -> Fs.copyFileSync(H.joinOutputPaths(`fonts/han-space.woff2`))
     })

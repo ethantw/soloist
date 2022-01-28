@@ -155,6 +155,8 @@ let make = () => {
       <title>{ title }</title>
 
       <style>{ css }</style>
+
+      <script defer={true} src="//cdnjs.cloudflare.com/ajax/libs/Han/3.3.0/han.min.js"></script>
       <script>{ script }</script>
     </Helmet>
 
@@ -209,11 +211,17 @@ let make = () => {
 
     /* Main content: */
     <main>
+      <noscript>
+        <style>{ H.s(`Main Article, Main Address h1 { opacity: 1 }`) }</style>
+      </noscript>
+
       <article dangerouslySetInnerHTML={{ "__html": getResumeHTML() }} />
 
       <address>
-        <h1 lang="zh">{ H.s(`聯繫方式`) }</h1>
-        <h1 lang="en">{ H.s(`Contact`) }</h1>
+        <h1>
+          <span lang="zh">{ H.s(`聯繫方式`) }</span>
+          <span lang="en">{ H.s(`Contact`) }</span>
+        </h1>
 
         <dl>
           <dt lang="zh">{ H.s(`信箱`) }</dt>
