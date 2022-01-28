@@ -10,7 +10,7 @@ module Fs = {
 }
 
 module Minifier = {
-  type o = { collapseWhitespace: bool }
+  type o = { collapseWhitespace: bool, minifyCSS: bool, minifyJS: bool }
   @module("html-minifier") external minify: (string, o) => string = "minify"
 }
 
@@ -60,7 +60,11 @@ ${ raw -> Js.String2.trim }
 </body>
 </html>`
   -> Js.String2.replaceByRe(%re(`/\sdata\-react\-helmet="true"/g`), "")
-  -> Minifier.minify({ collapseWhitespace: true })
+  -> Minifier.minify({
+      collapseWhitespace: true,
+      minifyCSS: true,
+      minifyJS: true,
+    })
 
       H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
       H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })
