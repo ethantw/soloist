@@ -22,6 +22,7 @@ let _ =
   Router.routes
   -> Belt.Array.map(({ path, content, to }) => {
       let content = switch (content, to) {
+        | (Some(content), Some(to)) => <>{ content }<Redirect to /></>
         | (Some(content), _) => content
         | (None, Some(to)) => <Redirect to />
         | (None, None) => <></>
@@ -63,7 +64,7 @@ ${ raw -> Js.String2.trim }
   -> Minifier.minify({
       collapseWhitespace: true,
       minifyCSS: true,
-      minifyJS: false,
+      minifyJS: true,
     })
 
       H.joinOutputPaths(path) -> Fs.mkdirSync({ recursive: true, force: false })
@@ -71,6 +72,7 @@ ${ raw -> Js.String2.trim }
 
       H.joinOutputPaths(`${path}/index.html`) -> Fs.writeFileSync(cooked, { flag: "wx", encoding: "utf8" })
 
+      H.joinAssetsPaths(`CNAME`) -> Fs.copyFileSync(H.joinOutputPaths(`CNAME`))
       H.joinAssetsPaths(`favicon.svg`) -> Fs.copyFileSync(H.joinOutputPaths(`favicon.svg`))
       H.joinAssetsPaths(`fonts/han-space.woff2`) -> Fs.copyFileSync(H.joinOutputPaths(`fonts/han-space.woff2`))
     })

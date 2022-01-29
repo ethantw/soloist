@@ -10,6 +10,6 @@ let routes: array<route> = [
 
   // Résumé:
   { path: `/résumé`, content: Some(<Resume />), to: None },
-  { path: `/resume`, to: Some(`/résumé`), content: None },
-  { path: `/cv`, to: Some(`/résumé`), content: None },
+  { path: `/resume`, to: Some(`/résumé`), content: Some(<ResumeHelmet />) },
+  { path: `/cv`, to: Some(`/résumé`), content: Some(<ResumeHelmet />) },
 ]

@@ -148,14 +148,11 @@ let getResumeHTML = () => {
 @react.component
 let make = () =>
   <>
+    <ResumeHelmet />
+
     <Helmet>
       <body className=`Résumé` />
-      <link rel="icon" href="/favicon.svg" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-      <title>{ title }</title>
-
       <style>{ css }</style>
-
       <script defer={true} src="//cdnjs.cloudflare.com/ajax/libs/Han/3.3.0/han.min.js"></script>
       <script>{ script }</script>
     </Helmet>

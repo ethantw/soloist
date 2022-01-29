@@ -16,7 +16,7 @@
   "watch": {
     "build": {
       "patterns": ["src"],
-      "extensions": "res, styl",
+      "extensions": "res, styl, svg",
       "quiet": true,
       "runOnChangeOnly": true
     }
