@@ -6,7 +6,7 @@ type route = {
 
 let routes: array<route> = [
   // Home:
-  { path: `/`, content: Some(<></>), to: None },
+  { path: `/`, content: Some(<Home />), to: None },
 
   // Résumé:
   { path: `/résumé`, content: Some(<Resume />), to: None },
