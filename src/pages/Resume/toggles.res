@@ -21,7 +21,7 @@ let toggles: Js.Array.t<toggle> = [
 
 let togglesById =
   toggles
-  -> Belt.Array.reduce(
+  -> H.fold(
       Js.Dict.empty(),
       (acc, t) => {
         acc -> Js.Dict.set(t.id, t)
