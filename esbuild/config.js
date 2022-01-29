@@ -1,4 +1,4 @@
-const __DIST__ = 'public'
+const __DIST__ = 'docs'
 
 const config = {
   charset: 'utf8',

@@ -10,7 +10,7 @@
     "build-client": "npx esbuild src/pages/Resume/Resume.client.bs.js --bundle --outfile=src/pages/Resume/Resume.client.js",
     "build-static": "esno src/build.bs.js",
     "build-rescript": "npx rescript",
-    "server": "npx http-server public --port=8000",
+    "server": "npx http-server docs --port=8000",
     "watch": "npm-watch build"
   },
   "watch": {

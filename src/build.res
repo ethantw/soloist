@@ -14,7 +14,7 @@ module Minifier = {
   @module("html-minifier") external minify: (string, o) => string = "minify"
 }
 
-// 1. Clean up the `/public` directory:
+// 1. Clean up the `/docs` directory:
 Fs.rmSync(H.outputPath, { recursive: true, force: true })
 
 // 2. Parsing, building and creating content pages:
