@@ -4,12 +4,26 @@
   "description": "Yijun’s",
   "type": "module",
   "scripts": {
-    "start": "npx http-server public --port=8888",
-    "build": "npx rescript"
+    "build": "pnpm run build-rescript; pnpm run build-client; pnpm run build-static;",
+    "start": "pnpm run build; pnpm run watch & pnpm run server",
+
+    "build-client": "npx esbuild src/pages/Resume/Resume.client.bs.js --bundle --outfile=src/pages/Resume/Resume.client.js",
+    "build-static": "esno src/build.bs.js",
+    "build-rescript": "npx rescript",
+    "server": "npx http-server public --port=8000",
+    "watch": "npm-watch build"
+  },
+  "watch": {
+    "build": {
+      "patterns": ["src"],
+      "extensions": "res, styl",
+      "quiet": true,
+      "runOnChangeOnly": true
+    }
   },
   "author": "Chen Yijun",
   "engines": {
-    "node": "15.x"
+    "node": "17.x"
   },
   "bin": {
     "esno": "./esbuild/bin/esno.js"
@@ -26,6 +40,7 @@
     "http-server": "^14.1.0",
     "markdown-it": "^12.3.2",
     "normalize.css": "^8.0.1",
+    "npm-watch": "^0.11.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
