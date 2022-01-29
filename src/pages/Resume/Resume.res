@@ -146,7 +146,7 @@ let getResumeHTML = () => {
 }
 
 @react.component
-let make = () => {
+let make = () =>
   <>
     <Helmet>
       <body className=`Résumé` />
@@ -249,4 +249,3 @@ let make = () => {
       <p hidden={true}>{ H.s(`© ${year} `) }</p>
     </footer>
   </>
-}
