@@ -3,7 +3,7 @@
 
 陳奕鈞是一個web前端工程師，擅常編寫表達性強、容易維護並兼顧效能的程式碼。熱衷於函數式編程且厭惡重覆性的工作，希望現實世界能用映射/折疊/過濾函數來處理雜事就好了。奕鈞也在字體排印、語言學、布局排版、介面交互等領域有著深入的認知，能游刃有餘地拆解並攻克複雜的工程問題。
 
-Yijun is a front-end web developer skilled at writing expressive, maintainable and efficient code. Passionate about functional programming and averse to repetitive tasks, he wishes there are map/fold/filter functions in the physical world for everyday errands. Meanwhile, Yijun has profound knowledge in fields like typography, linguistics, typesetting layouts, UI and UX. These have helped him conquer vexed engineering hurdles professionally through out the years.
+Yijun is a front-end web developer skilled at writing expressive, maintainable and efficient code. Passionate about functional programming and averse to repetitive tasks, he wishes there are map/fold/filter functions in the physical world for everyday errands. Meanwhile, Yijun has profound knowledge in fields like typography, linguistics, typesetting layouts, UI and UX, which have helped him conquer vexed engineering hurdles professionally throughout the years.
 
 ## 工作經歷
 ## Work experience
@@ -27,7 +27,7 @@ Mainly responsible for its online courses system, [ComiruAir][ComiruAir]. Unifie
 
 經前同事及主管的推薦重新加入當時甫成立的「人力資源管理系統」部門。期間我負責的模塊有著極高的QA通過率、極低的bug回報率。
 
-Re-joined Moka to its newly-established department of *human capital management* system through the recommendation by former collegues and supervisors. The part Yijun was responsible for had impressive QA pass rate, an extremely small amount of reported bugs.
+Re-joined Moka to its newly-established department of *human capital management* system through the recommendation by former collegues and supervisors. The part Yijun was in charge of showed impressive QA pass rate, an extremely small amount of reported bugs.
 
 [Moka]: //mokahr.com
 
@@ -38,7 +38,7 @@ Re-joined Moka to its newly-established department of *human capital management*
 
 獨自開發墨刀新版「企業版專案管理系統」，改寫原基於jQuery和Spine的老舊架構、引入Redux數據流、並建立一套複用度高的權限檢査系統，大幅提升程式的可維護性和擴展性。並在空餘時維護功能齊全且使用至今的UI組件庫。
 
-Developed the project management system individually, including re-writing the entire codebase that was based on jQuery and Spine, introducing the React/Redux flow, and creating a reusable premission-check system, which had improved the maintainability and extensibility of the program. Also built a tailored UI components library that has been used until today.
+Developed the project management system by himself, including rewriting the entire codebase that was based on jQuery and Spine, introducing the React/Redux flow, and creating a reusable premission-check system, which helped improve the maintainability and extensibility of the program. Also built a tailored UI components library that is still in use today.
 
 [Modao]: //modao.cc
 [MockingBot]: //mockingbot.com
@@ -50,7 +50,7 @@ Developed the project management system individually, including re-writing the e
 
 負責Moka企業招聘管理系統的開發，並維護面向使用者的多渠道簡歷爬蟲 Chrome 擴展元件。作為團隊初創成員，在公司初期同時兼顧後端（Node.js）開發。
 
-Responsible for Moka’s *applicant tracking system* and maintained a user-orient Chrome extension for résumé crawling. Taking both front- and back-end (Node.js) development into acccount as one of the startup’s founding members.
+Responsible for Moka’s *applicant tracking system* and maintained a user-oriented Chrome extension for résumé crawling. As one of the startup’s founding members, Yijun also took charge of both front- and back-end (Node.js) development at the very beginning.
 
 ### 《中文排版需求》特邀專家；萬維網聯盟（W3C）；[w3.org/TR/clreq](//w3.org/TR/clreq)
 ### Invited Expert for <cite><abbr title="Requirements for Chinese Text Layout">CLReq</abbr></cite>; W3C [w3.org/TR/clreq](//w3.org/TR/clreq)
